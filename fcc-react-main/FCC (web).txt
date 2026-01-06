@@ -1,0 +1,42 @@
+FCC (web) :
+
+1. Home Utama :
+
+2. Login
+
+3. Peer Counselor (docs) :
+
+4. Peer Partner (docs) :
+
+5. Creative Team (docs) :
+
+6. SASC Staff (docs) :
+
+7. Semuanya (docs) :
+
+8. Bingung :
+
+Bagian selesai :
+- Jadi login ini berupa username dan password, dan SASC Staff akan menginput username dan password, serta menginformasikan username dan password ke user (urusan SASC Staff), serta untuk NIM beda, sedangkan password sama (user)
+- Tulisan "Sudah punya akun?" dihapus
+- Register di hapus saja, jadi hanya login username dan password
+- Sinkronisasi halaman login dan sidebar input data login student
+- Data form reset jika beda login
+- Tambahkan sidebar input data login student beserta fungsinya
+- Menambahkan header dan isi dari partner dan pendamping (Tarik data report)
+- Tambahkan 2 kotak atau tombol dropdown pairing, misalnya kotak 1 harus pilihan dalam data partner dan kotak 1 lagi untuk pilihan data counselor, data partner, dan data creative team (input data buddy)
+- Setelah input data peran, maka otomatis tersimpan di checklist pengambilan souvenir dan checklist pengambilan souvenir cukup menggunakan periode, nim, dan area kampus untuk fungsi search
+- Tambah sidebar dan fungsi input data counselor, input data partner, dan input data creative team
+- Tambah input area kampus, fakultas, dan input periode (input data counselor, input data partner, dan input data creative team)
+- Tambahkan binusian id, area kampus dan PIC (input pembina)
+- Perbaiki logo lonjong
+- Periode cukup satu saja (Role Selection, Peer Counselor, Peer Partner, Creative Team, dan SASC Staff)
+- Tambahkan evaluasi dan kueisoner di sidebar (Peer Counselor, Peer Partner, dan Creative Team)
+- Tambahkan input evaluasi dan kueisoner di sidebar (SASC Staff)
+- Tambahkan area kampus di Bawah jurusan dan status case (isinya close untuk setiap pertemuan selesai dan river untuk case terlalu berat)
+- Status topik di hidden
+- Upload hasil diubah menjadi link IG
+- Merapikan posisi header pada tabel dan isi tabel di beberapa halaman
+- Informasi kontaknya ig saja
+- Perbaiki search periode (di localhost tidak bisa, sedangkan di github bisa)- (Verifikasi peer counselor, verifikasi peer partner, dan verifikasi creative team) dan cek 3 halaman peran dan tarik data report
+- Hapus notifikasi (Peer Counselor, Peer Partner, Creative Team, dan SASC Staff)
