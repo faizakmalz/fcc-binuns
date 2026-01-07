@@ -83,6 +83,7 @@ export default function RoleSelection() {
 
       if (result.success) {
         localStorage.setItem("roleData", JSON.stringify(roleDataObj));
+        console.log("jhjbgjkgv", JSON.parse(localStorage.getItem("roleData")))
         
         if (role === "peer-counselor") navigate("/peer-counselor");
         else if (role === "peer-partner") navigate("/peer-partner");

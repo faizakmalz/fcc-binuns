@@ -127,7 +127,7 @@ export default function PeerPartner() {
     const logbookObj = {
       username: loggedInUsername,
       periode: roleData.periode || "-",
-      kampus: roleData.campus || roleData.campus || "-",
+      kampus: roleData.campus || roleData.area || "-",
       nim_buddy: selectedBuddy?.nim || "-",
       nama_buddy: selectedBuddy?.nama || "-",
       jurusan: selectedBuddy?.jurusan || "-",
@@ -281,7 +281,7 @@ export default function PeerPartner() {
             <p className="font-semibold text-gray-800">
               Kampus:{" "}
               <span className="font-normal">
-                {roleData.campus || roleData.campus || "Tidak ada data kampus"}
+                {roleData.campus || roleData.area || "Tidak ada data kampus"}
               </span>
             </p>
           </div>
