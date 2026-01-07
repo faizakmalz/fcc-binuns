@@ -49,7 +49,7 @@ export default function PeerPartner() {
       if (buddyResult.success) {
         setBuddyList(buddyResult.data);
       }
-
+      console.log("Fetched buddy list:", loggedInUsername);
       if (loggedInUsername) {
         const logbookResult = await getPartnerLogbookByUsername(loggedInUsername);
         console.log("Logbook Result:", logbookResult);
@@ -127,7 +127,7 @@ export default function PeerPartner() {
     const logbookObj = {
       username: loggedInUsername,
       periode: roleData.periode || "-",
-      kampus: roleData.campus || roleData.kampus || "-",
+      kampus: roleData.campus || roleData.campus || "-",
       nim_buddy: selectedBuddy?.nim || "-",
       nama_buddy: selectedBuddy?.nama || "-",
       jurusan: selectedBuddy?.jurusan || "-",
@@ -176,12 +176,7 @@ export default function PeerPartner() {
 
       const logbookResult = await getPartnerLogbookByUsername(loggedInUsername);
       if (logbookResult.success) {
-        const filtered = logbookResult.data.filter(
-          (item) =>
-            item.periode === roleData?.periode &&
-            item.kampus === (roleData?.campus || roleData?.kampus)
-        );
-        setRiwayat(filtered);
+        setRiwayat(logbookResult.data);
       }
     } else {
       Swal.fire({
@@ -286,7 +281,7 @@ export default function PeerPartner() {
             <p className="font-semibold text-gray-800">
               Kampus:{" "}
               <span className="font-normal">
-                {roleData.campus || roleData.kampus || "Tidak ada data kampus"}
+                {roleData.campus || roleData.campus || "Tidak ada data kampus"}
               </span>
             </p>
           </div>
