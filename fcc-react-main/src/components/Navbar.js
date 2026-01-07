@@ -69,7 +69,7 @@ export default function Navbar() {
           to="/login"
           className="px-4 py-2 bg-gray-300 text-black rounded-lg hover:bg-black hover:text-white transition"
         >
-          Login / Register
+          Login
         </Link>
       </div>
     </nav>

@@ -140,14 +140,20 @@ export const getAllStudentAccounts = async () => {
   }
 };
 
-export const deleteStudentAccount = async (id) => {
+export const deleteStudentAccount = async (id, roleId) => {
   try {
     const { error } = await supabase
       .from('users')
       .delete()
       .eq('id', id);
 
+    const { error: roleDataError } = await supabase
+      .from('role_data')
+      .delete()
+      .eq('id', id);
+
     if (error) throw error;
+    if (roleDataError) throw roleDataError;
     return { success: true };
   } catch (error) {
     console.error('Error deleting student account:', error);

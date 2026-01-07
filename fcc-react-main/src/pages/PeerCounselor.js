@@ -37,8 +37,7 @@ export default function PeerCounselor() {
   const user = JSON.parse(localStorage.getItem("user"));
   const loggedInUsername = user?.username;
 
-  useEffect(() => {
-    const fetchData = async () => {
+  const fetchData = async () => {
       setLoading(true);
 
       const savedRole = JSON.parse(localStorage.getItem("roleData"));
@@ -61,9 +60,11 @@ export default function PeerCounselor() {
         questionnaires: questResult.success ? questResult.data : [],
       });
 
-      setLoading(false);
-    };
+    setLoading(false);
+  };
 
+
+  useEffect(() => {
     fetchData();
   }, []);
 
@@ -192,6 +193,8 @@ export default function PeerCounselor() {
         text: "Gagal menyimpan data: " + submitResult.error,
       });
     }
+
+    await fetchData();
 
     setLoading(false);
   };

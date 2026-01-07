@@ -305,7 +305,7 @@ const [buddyModalMode, setBuddyModalMode] = useState(null);
     setLoading(false);
   };
 
-  const handleDeleteStudent = async (id) => {
+  const handleDeleteStudent = async (id, roleId) => {
     const confirm = await Swal.fire({
       title: "Hapus akun student?",
       text: "Data yang dihapus tidak dapat dikembalikan",
@@ -316,7 +316,7 @@ const [buddyModalMode, setBuddyModalMode] = useState(null);
     });
     if (!confirm.isConfirmed) return;
     setLoading(true);
-    const result = await deleteStudentAccount(id);
+    const result = await deleteStudentAccount(id, roleId);
     if (result.success) {
       await loadAllData();
       Swal.fire({ icon: "success", title: "Berhasil", text: "Akun student berhasil dihapus", timer: 2000, showConfirmButton: false });
@@ -1543,9 +1543,6 @@ const [buddyModalMode, setBuddyModalMode] = useState(null);
                     {/* Filter: Hanya Counselor yang belum di-assign */}
                     {allRolesForBuddy
                       .filter(role => {
-                        // RULE 1: Hanya Peer Counselor
-                        if (role.role !== "Peer Counselor") return false;
-                        
                         // RULE 2: Counselor yang belum di-assign ke buddy lain
                         const isAssigned = dataBuddy.some(
                           buddy => buddy.pendampingNim === role.nim
@@ -1560,14 +1557,10 @@ const [buddyModalMode, setBuddyModalMode] = useState(null);
                     }
                   </select>
                   <p className="text-xs text-gray-500 mt-1">
-                    {allRolesForBuddy.filter(r => 
-                      r.role === "Peer Counselor" && 
-                      !dataBuddy.some(b => b.pendampingNim === r.nim)
+                    {allRolesForBuddy.filter(r => !dataBuddy.some(b => b.pendampingNim === r.nim)
                     ).length === 0 
                       ? "⚠️ Semua counselor sudah di-assign" 
-                      : `${allRolesForBuddy.filter(r => 
-                          r.role === "Peer Counselor" && 
-                          !dataBuddy.some(b => b.pendampingNim === r.nim)
+                      : `${allRolesForBuddy.filter(r =>!dataBuddy.some(b => b.pendampingNim === r.nim)
                         ).length} counselor tersedia`
                     }
                   </p>
@@ -1795,7 +1788,7 @@ const [buddyModalMode, setBuddyModalMode] = useState(null);
                       <td className="py-2 px-3 text-center">{s.roleData?.role || "Belum ada role"}</td>
                       <td className="p-2 px-3 text-center">
                         <button
-                          onClick={() => handleDeleteStudent(i)}
+                          onClick={() => handleDeleteStudent(s.roleData?.user_id, (s.id ? s.id : null))}
                           className="text-red-500 hover:text-red-700 text-sm font-medium"
                         >
                           Hapus
