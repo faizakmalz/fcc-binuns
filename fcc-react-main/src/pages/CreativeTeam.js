@@ -11,7 +11,8 @@ import {
   getEvaluationsByRole,
   getQuestionnairesByRole,
   getCreativeTeamByUserId,
-  getCreativeLogbookByUsername
+  getCreativeLogbookByUsername,
+  getPembinaById
 } from "../utils/supabaseHelpers";
 
 export default function CreativeTeam() {
@@ -34,14 +35,23 @@ export default function CreativeTeam() {
   const [activePage, setActivePage] = useState("dashboard");
   const [showUploadLink, setShowUploadLink] = useState(false);
   const [evaluation, setEvaluation] = useState({ evaluations: [], questionnaires: [] });
+  const [pembina, setPembina] = useState({});
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (userId) {
       loadAllData();
+      getPembina();
     }
-  }, [userId]);
+  }, []);
+
+  const getPembina = async () => {
+    const pembinaData = await getPembinaById(roleData?.pembina_id || null);
+    setPembina(pembinaData?.data || {});
+  }
+  console.log("Fetched pembina data:", pembina);
+
 
   const loadAllData = async () => {
     setLoading(true);
@@ -136,7 +146,7 @@ export default function CreativeTeam() {
         status: formData.status,
         link_ig: formData.linkIG || "",
         periode: roleData?.periode || "",
-        pembina: roleData?.pembina || "",
+        pembina: roleData?.pembina_id || "",
         status_verifikasi: formData.statusVerifikasi || "Menunggu",
         komentar_staff: formData.komentarStaff || "",
       };
@@ -309,7 +319,7 @@ export default function CreativeTeam() {
               Periode: <span className="font-normal">{roleData.periode || "-"}</span>
             </p>
             <p className="font-semibold text-gray-800">
-              Pembina: <span className="font-normal">{roleData.pembina || "-"}</span>
+              Pembina: <span className="font-normal">{pembina.nama || "-"}</span>
             </p>
           </div>
         )}

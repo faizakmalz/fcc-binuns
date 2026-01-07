@@ -61,7 +61,8 @@ export const updateUserRole = async (userId, roleData) => {
         area: roleData.area,
         fakultas: roleData.fakultas,
         periode: roleData.periode,
-        role: roleData.role
+        role: roleData.role,
+        pembina_id: roleData.pembina_id,
       }])
       .select()
       .single();
@@ -141,19 +142,24 @@ export const getAllStudentAccounts = async () => {
 };
 
 export const deleteStudentAccount = async (id, roleId) => {
+  console.log("=== DEBUG deleteStudentAccount ===", id, roleId);
   try {
     const { error } = await supabase
       .from('users')
       .delete()
       .eq('id', id);
 
-    const { error: roleDataError } = await supabase
+    if (roleId !== null && roleId !== undefined) {
+      const { error: roleDataError } = await supabase
       .from('role_data')
       .delete()
-      .eq('id', id);
+      .eq('id', roleId);
+          if (roleDataError) throw roleDataError;
+    } else {
+      console.log("No roleId provided, skipping role_data deletion.");
+    }
 
     if (error) throw error;
-    if (roleDataError) throw roleDataError;
     return { success: true };
   } catch (error) {
     console.error('Error deleting student account:', error);
@@ -184,6 +190,22 @@ export const getAllPembina = async () => {
       .from('pembina')
       .select('*')
       .order('created_at', { ascending: false });
+
+    if (error) throw error;
+    return { success: true, data };
+  } catch (error) {
+    console.error('Error fetching pembina:', error);
+    return { success: false, error: error.message };
+  }
+};
+
+export const getPembinaById = async (id) => {
+  try {
+    const { data, error } = await supabase
+      .from('pembina')
+      .select('*')
+      .eq('id', id)
+      .single();
 
     if (error) throw error;
     return { success: true, data };

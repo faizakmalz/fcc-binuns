@@ -75,7 +75,8 @@ export default function RoleSelection() {
         area: role === "creative-team" ? area : campus, 
         fakultas,
         periode: parseInt(periode),
-        role: roleMap[role]
+        role: roleMap[role],
+        pembina_id: role === "creative-team" ? pembina : null,
       };
 
       const result = await updateUserRole(user.id, roleDataObj);
@@ -201,7 +202,7 @@ export default function RoleSelection() {
                   <option value="">-- Pilih Pembina --</option>
                   
                   {(JSON.parse(localStorage.getItem("pembinaList")) || []).map((p, i) => (
-                    <option key={i} value={p.nama}>
+                    <option key={i} value={p.id}>
                       {p.nama}
                     </option>
                   ))}
@@ -216,7 +217,7 @@ export default function RoleSelection() {
                 <label className="block text-gray-900 font-medium mb-1">Area</label>
                 <input
                   type="text"
-                  placeholder="Masukkan area (contoh: Design, Content)"
+                  placeholder="Masukkan area (Kemanggisan, Alam Sutera, dll.)"
                   value={area}
                   onChange={(e) => {
                     setArea(e.target.value);

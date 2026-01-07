@@ -306,6 +306,7 @@ const [buddyModalMode, setBuddyModalMode] = useState(null);
   };
 
   const handleDeleteStudent = async (id, roleId) => {
+    console.log("=== DEBUG DELETE STUDENT ===", id, roleId);
     const confirm = await Swal.fire({
       title: "Hapus akun student?",
       text: "Data yang dihapus tidak dapat dikembalikan",
@@ -1788,7 +1789,10 @@ const [buddyModalMode, setBuddyModalMode] = useState(null);
                       <td className="py-2 px-3 text-center">{s.roleData?.role || "Belum ada role"}</td>
                       <td className="p-2 px-3 text-center">
                         <button
-                          onClick={() => handleDeleteStudent(s.roleData?.user_id, (s.id ? s.id : null))}
+                          onClick={() => {
+                            console.log("Deleting student with user_id:", s, s.roleData?.user_id, "and id:", s.roleData?.id);
+                            handleDeleteStudent(s.id, s.roleData?.id);
+                          }}
                           className="text-red-500 hover:text-red-700 text-sm font-medium"
                         >
                           Hapus

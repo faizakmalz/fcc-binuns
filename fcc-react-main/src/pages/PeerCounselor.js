@@ -44,6 +44,7 @@ export default function PeerCounselor() {
       if (savedRole) {
         setRoleData(savedRole);
       }
+      console.log("Fetched role data:", savedRole);
       if (loggedInUsername) {
         const logbookResult = await getCounselorLogbookByUsername(loggedInUsername);
         if (logbookResult.success) {
