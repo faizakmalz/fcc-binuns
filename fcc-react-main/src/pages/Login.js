@@ -85,12 +85,13 @@ export default function Login() {
             "Peer Partner": "/peer-partner",
             "Creative Team": "/creative-team"
           };
+          console.log("Navigating to role dashboard for role:", userData);
           
           // Simpan roleData untuk digunakan di dashboard (format seperti sebelumnya)
           localStorage.setItem("roleData", JSON.stringify({
             role: role.toLowerCase().replace(" ", "-"), // peer-counselor, dll.
             campus: userData.roleData.area, // Area = campus untuk counselor/partner
-            pembina: userData.roleData.pembina || null, // Hanya untuk creative
+            pembina: userData.roleData.pembina_id || null, // Hanya untuk creative
             periode: userData.roleData.periode,
             jurusan: userData.roleData.jurusan,
             fakultas: userData.roleData.fakultas

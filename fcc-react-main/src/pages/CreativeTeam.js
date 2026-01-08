@@ -47,7 +47,8 @@ export default function CreativeTeam() {
   }, []);
 
   const getPembina = async () => {
-    const pembinaData = await getPembinaById(roleData?.pembina_id || null);
+    const pembinaData = await getPembinaById(roleData?.pembina || null);
+    console.log("Pembina data fetched:", pembinaData, roleData);
     setPembina(pembinaData?.data || {});
   }
   console.log("Fetched pembina data:", pembina);

@@ -215,22 +215,6 @@ export const getPembinaById = async (id) => {
   }
 };
 
-export const getPembinaNameById = async (id) => {
-  try {
-    const { data, error } = await supabase
-      .from('pembina')
-      .select('*')
-      .eq('id', id)
-      .single();
-
-    if (error) throw error;
-    return data.nama;
-  } catch (error) {
-    console.error('Error fetching pembina:', error);
-    return { success: false, error: error.message };
-  }
-};
-
 export const deletePembina = async (binusianId) => {
   try {
     const { error } = await supabase
