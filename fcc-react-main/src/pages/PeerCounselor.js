@@ -180,12 +180,7 @@ export default function PeerCounselor() {
 
       const logbookResult = await getCounselorLogbookByUsername(loggedInUsername);
       if (logbookResult.success) {
-        const filtered = logbookResult.data.filter(
-          (item) =>
-            item.periode === roleData?.periode &&
-            item.kampus === (roleData?.campus || roleData?.kampus)
-        );
-        setRiwayat(filtered);
+        setRiwayat(logbookResult.data);
       }
     } else {
       Swal.fire({
@@ -295,7 +290,7 @@ export default function PeerCounselor() {
             <p className="font-semibold text-gray-800">
               Kampus:{" "}
               <span className="font-normal">
-                {roleData.campus || roleData.kampus || "Tidak ada data kampus"}
+                {roleData.campus || roleData.area || "Tidak ada data kampus"}
               </span>
             </p>
           </div>
