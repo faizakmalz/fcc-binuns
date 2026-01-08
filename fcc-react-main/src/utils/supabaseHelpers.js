@@ -215,6 +215,22 @@ export const getPembinaById = async (id) => {
   }
 };
 
+export const getPembinaNameById = async (id) => {
+  try {
+    const { data, error } = await supabase
+      .from('pembina')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error) throw error;
+    return data.nama;
+  } catch (error) {
+    console.error('Error fetching pembina:', error);
+    return { success: false, error: error.message };
+  }
+};
+
 export const deletePembina = async (binusianId) => {
   try {
     const { error } = await supabase
@@ -961,8 +977,23 @@ export const getAllCreativeLogbook = async () => {
       .select('*')
       .order('created_at', { ascending: false });
 
+    const pembinaData = data.map(async (entry) => {
+      const { data: pembinaInfo, error: pembinaError } = await supabase
+        .from('pembina')
+        .select('nama')
+        .eq('id', entry.pembina)
+        .single();
+      if (pembinaError) {
+        console.error('Error fetching pembina info:', pembinaError);
+        return { ...entry, pembina_nama: null };
+      }
+      return { ...entry, pembina_nama: pembinaInfo.nama };
+    });
+
+    const dataWithPembina = await Promise.all(pembinaData);
+
     if (error) throw error;
-    return { success: true, data };
+    return { success: true, data: dataWithPembina };
   } catch (error) {
     console.error('Error fetching all partner logbook:', error);
     return { success: false, error: error.message };

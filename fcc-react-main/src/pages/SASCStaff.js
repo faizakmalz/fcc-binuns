@@ -36,6 +36,7 @@ import {
   updateUserRole,
   updateCounselorData,
   updatePartnerData,
+  getPembinaNameById,
 } from "../utils/supabaseHelpers";
 
 export default function SASCStaff() {
@@ -176,7 +177,7 @@ const [buddyModalMode, setBuddyModalMode] = useState(null);
 
       const creativeLogRes = await getAllCreativeLogbook();
       if (creativeLogRes.success) {
-        setDataCreative(creativeLogRes.data.map(item => ({
+        setDataCreative(creativeLogRes.data.map(item =>  ({
           ...item,
           statusVerifikasi: item.status_verifikasi || "Menunggu",
           komentarStaff: item.komentar_staff || "",
@@ -1132,7 +1133,7 @@ const [buddyModalMode, setBuddyModalMode] = useState(null);
       ...dataCreative.map((d) => ({
         role: "Creative Team",
         periode: d.periode || "-",
-        pembina: d.pembina || "-",
+        pembina: d.pembina_nama || "-",
         topik: d.topik || "-",
         tanggalDiskusi: d.tanggalDiskusi || "-",
         mediaDiskusi: d.mediaDiskusi || "-",
@@ -2848,6 +2849,9 @@ const [buddyModalMode, setBuddyModalMode] = useState(null);
                   onChange={(e) => setSearchPeriode(e.target.value)}
                 />
               </div>
+              {
+                console.log("dataCreative:", dataCreative)
+              }
               {dataCreative.length === 0 ? (
                 <p className="text-gray-500">Belum ada data Creative Team.</p>
               ) : (
@@ -2877,7 +2881,7 @@ const [buddyModalMode, setBuddyModalMode] = useState(null);
                       .map((item, i) => (
                       <tr key={i} className="border-b hover:bg-gray-50">
                         <td className="py-2 px-3 text-center">{item.periode || "-"}</td>
-                        <td className="py-2 px-3 text-center">{item.pembina || "-"}</td>
+                        <td className="py-2 px-3 text-center">{item.pembina_nama || "-"}</td>
                         <td className="py-2 px-3 text-center">{item.topik}</td>
                         <td className="py-2 px-3 text-center">{item.tanggalDiskusi}</td>
                         <td className="py-2 px-3 text-center">{item.mediaDiskusi}</td>
