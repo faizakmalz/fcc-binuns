@@ -76,7 +76,7 @@ export default function RoleSelection() {
         fakultas,
         periode: parseInt(periode),
         role: roleMap[role],
-        pembina_id: role === "creative-team" ? pembina : null,
+        pembina: role === "creative-team" ? pembina : null,
       };
 
       const result = await updateUserRole(user.id, roleDataObj);
