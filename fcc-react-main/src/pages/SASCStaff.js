@@ -123,7 +123,6 @@ const [buddyModalMode, setBuddyModalMode] = useState(null);
 
       const partnerRes = await getRoleDataByType("Peer Partner");
       if (partnerRes.success) setDataInputPartner(partnerRes.data);
-
       const creativeRes = await getRoleDataByType("Creative Team");
       if (creativeRes.success) setDataInputCreativeTeam(creativeRes.data);
 
@@ -1496,7 +1495,7 @@ const [buddyModalMode, setBuddyModalMode] = useState(null);
                     onChange={handleBuddyChange}
                     className="border rounded-lg p-2 w-full"
                   >
-                    <option value="">-- Pilih Partner (Opsional) --</option>
+                    <option value="">-- Pilih Partner --</option>
                     {/* Filter: Partner yang belum di-assign ke buddy lain */}
                     {dataInputPartner
                       .filter(partner => {
@@ -1508,7 +1507,7 @@ const [buddyModalMode, setBuddyModalMode] = useState(null);
                       })
                       .map((p, i) => (
                         <option key={i} value={p.nim}>
-                          {p.nama} ({p.nim}) - {p.area}
+                          {p.nama} ({p.nim}) - {p.role}
                         </option>
                       ))
                     }
@@ -1523,7 +1522,7 @@ const [buddyModalMode, setBuddyModalMode] = useState(null);
                 
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">
-                    Pilih Pendamping (Counselor Only)
+                    Pilih Pendamping
                   </label>
                   <select
                     value={formBuddy.roleNim}
@@ -1552,7 +1551,7 @@ const [buddyModalMode, setBuddyModalMode] = useState(null);
                       })
                       .map((r, i) => (
                         <option key={i} value={r.nim}>
-                          {r.nama} ({r.nim}) - {r.area}
+                          {r.nama} ({r.nim}) - {r.role}
                         </option>
                       ))
                     }
