@@ -243,12 +243,6 @@ export default function PeerPartner() {
 
       <main className="flex-1 p-10">
         <div className="flex justify-between items-center mb-8 w-full">
-          <button
-            onClick={() => navigate("/role-selection")}
-            className="px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg transition"
-          >
-            ← Kembali
-          </button>
 
           <div className="flex items-center space-x-6">
             <div className="flex items-center space-x-4">
