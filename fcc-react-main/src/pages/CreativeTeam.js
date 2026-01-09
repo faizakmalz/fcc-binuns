@@ -12,7 +12,8 @@ import {
   getQuestionnairesByRole,
   getCreativeTeamByUserId,
   getCreativeLogbookByUsername,
-  getPembinaById
+  getPembinaById,
+  updateCreativeLogbook
 } from "../utils/supabaseHelpers";
 
 export default function CreativeTeam() {
@@ -139,20 +140,29 @@ export default function CreativeTeam() {
 
     try {
       const logbookData = {
-        username: loggedInUsername,
         topik: formData.topik,
         tanggal_diskusi: formData.tanggalDiskusi,
         media_diskusi: formData.mediaDiskusi,
         hasil_diskusi: formData.hasilDiskusi,
         status: formData.status,
         link_ig: formData.linkIG || "",
+        username: loggedInUsername,
         periode: roleData?.periode || "",
         pembina: roleData?.pembina_id || "",
-        status_verifikasi: formData.statusVerifikasi || "Menunggu",
-        komentar_staff: formData.komentarStaff || "",
       };
-      console.log("Submitting logbook data:", logbookData);
-      const saveResult = await saveCreativeLogbook(logbookData);
+
+      let saveResult;
+      
+      // Kondisi: jika ada formData.id berarti UPDATE, kalau tidak berarti INSERT
+      if (formData.id) {
+        saveResult = await updateCreativeLogbook(formData.id, logbookData);
+        saveResult.isUpdate = true;
+      } else {
+        logbookData.status_verifikasi = "Menunggu";
+        logbookData.komentar_staff = "";
+        saveResult = await saveCreativeLogbook(logbookData);
+        saveResult.isUpdate = false;
+      }
 
       if (saveResult.success) {
         await loadAllData(); 
