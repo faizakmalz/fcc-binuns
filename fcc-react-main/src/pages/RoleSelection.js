@@ -193,6 +193,7 @@ export default function RoleSelection() {
                 <select
                   value={pembina}
                   onChange={(e) => {
+                    console.log(e.target.value);
                     setPembina(e.target.value);
                     setErrors({ ...errors, pembina: "" });
                   }}

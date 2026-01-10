@@ -138,6 +138,8 @@ export default function CreativeTeam() {
 
     setLoading(true);
 
+    console.log(roleData, formData, 'LLLLLL')
+
     try {
       const logbookData = {
         topik: formData.topik,
@@ -148,7 +150,7 @@ export default function CreativeTeam() {
         link_ig: formData.linkIG || "",
         username: loggedInUsername,
         periode: roleData?.periode || "",
-        pembina: roleData?.pembina_id || "",
+        pembina: pembina?.id || "",
       };
 
       let saveResult;

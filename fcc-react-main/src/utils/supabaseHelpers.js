@@ -62,7 +62,7 @@ export const updateUserRole = async (userId, roleData) => {
         fakultas: roleData.fakultas,
         periode: roleData.periode,
         role: roleData.role,
-        pembina_id: roleData.pembina_id,
+        pembina_id: roleData.pembina,
       }])
       .select()
       .single();
