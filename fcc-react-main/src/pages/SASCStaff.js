@@ -1477,18 +1477,6 @@ const [buddyModalMode, setBuddyModalMode] = useState(null);
                   placeholder="Cari nama atau NIM buddy..."
                   className="border rounded-lg p-2 flex-1"
                 />
-                <select
-                  className="border p-2 rounded-lg"
-                  onChange={(e) => {
-                    const filter = e.target.value;
-                    if (filter === "all") setSearchBuddy("");
-                    // Bisa tambahkan filter lain jika perlu
-                  }}
-                >
-                  <option value="all">Semua Status</option>
-                  <option value="with-partner">Dengan Partner</option>
-                  <option value="no-partner">Tanpa Partner</option>
-                </select>
               </div>
               
               {dataBuddy.length === 0 ? (
@@ -2046,20 +2034,6 @@ const [buddyModalMode, setBuddyModalMode] = useState(null);
           placeholder="Cari nama atau NIM..."
           className="border p-2 rounded-lg flex-1"
         />
-        <select
-          className="border p-2 rounded-lg"
-          onChange={(e) => {
-            const filter = e.target.value;
-            if (filter === "all") setSearchPartner("");
-            else if (filter === "with-buddy") {
-            } else if (filter === "no-buddy") {
-            }
-          }}
-        >
-          <option value="all">Semua Status</option>
-          <option value="with-buddy">Dengan Buddy</option>
-          <option value="no-buddy">Tanpa Buddy</option>
-        </select>
       </div>
 
       {dataInputPartner.length === 0 ? (
